@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { RecoilRoot } from "recoil";
 
 ReactDOM.render(
   <Auth0Provider
@@ -10,7 +11,9 @@ ReactDOM.render(
     clientId="Jw7PiMRYQUwsJ7o7ChflS6JrBSP61rgQ"
     redirectUri={window.location.origin}
   >
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </Auth0Provider>,
   document.getElementById("root")
 );
