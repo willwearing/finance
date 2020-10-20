@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.usercard {
+  border: 1px solid black;
+  margin: 2rem auto;
+  width: 25rem;
+}
