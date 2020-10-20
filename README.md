@@ -4,3 +4,4 @@ Login - use Auth0 - COMPLETE and private path now working
 Dashboard - allow users to search for stock tickers and save them to 'track' - data must persist after logout 
 State Management - https://recoiljs.org/ How to: https://www.youtube.com/watch?v=BchtCWxs7sA
 CSS to use - https://codepen.io/fossheim/pen/LYVOBRZ
+
