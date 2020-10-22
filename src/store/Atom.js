@@ -10,3 +10,8 @@ export const loadingState = atom({
   key: "loading",
   default: true,
 });
+
+export const searchState = atom({
+  key: "searchState",
+  default: "",
+});
