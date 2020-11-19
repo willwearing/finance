@@ -1,23 +1,26 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { searchStockState, loadingState } from "../store/Atom";
+import { tickerDataState, loadingState, xValuesState } from "../store/Atom";
 
 const StockCards = () => {
   const [loading, setLoading] = useRecoilState(loadingState);
-  const [ticker, setTicker] = useRecoilState(searchStockState);
+  const [tickerData, setTickerData] = useRecoilState(tickerDataState);
+  const [xValues, setXValues] = useRecoilState(xValuesState);
 
+  console.log(tickerData);
+  console.log(xValues);
   return (
     <div>
       {loading ? (
-        <h3>Enter a stock ticker</h3>
+        <h3>Enter a stock tickerData</h3>
       ) : (
         <div>
-          <h3>Company: {ticker["Global Quote"]["01. symbol"]}</h3>
-          <h4>Open: ${ticker["Global Quote"]["02. open"]}</h4>
-          <h4>High: ${ticker["Global Quote"]["03. high"]}</h4>
-          <h4>Low: ${ticker["Global Quote"]["04. low"]}</h4>
-          <h4>Price: ${ticker["Global Quote"]["05. price"]}</h4>
-          <h4>Change: {ticker["Global Quote"]["10. change percent"]}</h4>
+          <h3>Company: {tickerData["Global Quote"]["01. symbol"]}</h3>
+          <h4>Open: ${tickerData["Global Quote"]["02. open"]}</h4>
+          <h4>High: ${tickerData["Global Quote"]["03. high"]}</h4>
+          <h4>Low: ${tickerData["Global Quote"]["04. low"]}</h4>
+          <h4>Price: ${tickerData["Global Quote"]["05. price"]}</h4>
+          <h4>Change: {tickerData["Global Quote"]["10. change percent"]}</h4>
         </div>
       )}
     </div>
