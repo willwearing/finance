@@ -1,14 +1,20 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { tickerDataState, loadingState, xValuesState } from "../store/Atom";
+import {
+  tickerDataState,
+  loadingState,
+  xValuesState,
+  yValuesState,
+} from "../store/Atom";
 
 const StockCards = () => {
   const [loading, setLoading] = useRecoilState(loadingState);
   const [tickerData, setTickerData] = useRecoilState(tickerDataState);
   const [xValues, setXValues] = useRecoilState(xValuesState);
+  const [yValues, setYValues] = useRecoilState(yValuesState);
 
-  console.log(tickerData);
-  console.log(xValues);
+  console.log("look here for x axis values", xValues);
+  console.log("y axis values:", yValues);
   return (
     <div>
       {loading ? (

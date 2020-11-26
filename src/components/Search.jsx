@@ -21,7 +21,8 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     const apiKey = "FE9K3L2JE7ENJIKI";
-    let dataBackArray = [];
+    let xAxisValuesArray = [];
+    let yAxisValuesArray = [];
     axios
       .get(
         `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${searchTerm.search}&apikey=${apiKey}`
@@ -36,19 +37,17 @@ const Search = () => {
         `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${searchTerm.search}&outputsize=compact&apikey=${apiKey}`
       )
       .then((result) => {
-        // console.log(result.data["Time Series (Daily)"]);
-        setXValues(result.data);
-        // for (var key in res.data["Time Series (Daily)"]) {
-        //   dataBackArray.push(key);
-        //   console.log(dataBackArray);
-        // setYValues(res.data["Time Series (Daily)"][key]["1. open"]);
-        // console.log("look here", xValues);
+        for (var key in result.data["Time Series (Daily)"]) {
+          xAxisValuesArray.push(key);
+          yAxisValuesArray.push(
+            result.data["Time Series (Daily)"][key]["1. open"]
+          );
+        }
       })
-      // })
-      // .then(() => {
-      //   setXValues(dataBackArray);
-      //   console.log(xValues);
-      // })
+      .then(() => {
+        setXValues(xAxisValuesArray);
+        setYValues(yAxisValuesArray);
+      })
       .catch((err) => console.log(err));
     e.target.reset();
   };
