@@ -8,9 +8,11 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "plotly.js": "^1.57.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-json-pretty": "^2.2.0",
+    "react-plotly.js": "^2.5.0",
     "react-scripts": "3.4.3",
     "recoil": "0.0.13"
   },
