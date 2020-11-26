@@ -8,7 +8,7 @@ import { RecoilRoot } from "recoil";
 ReactDOM.render(
   <Auth0Provider
     domain="dev-xdm6nuoo.us.auth0.com"
-    clientId="oOKeHSn4DM1uRSFcSZmVAQ26qHvpINfB"
+    clientId="URiRtjVgPQrgZN0KoObNsk1T3BG7rDJl"
     redirectUri={window.location.origin}
   >
     <RecoilRoot>
