@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Search from "./Search";
 
 const Dashboard = () => {
   //state
   const { user, isAuthenticated } = useAuth0();
-
-  // setLoading(false)
 
   return (
     // user card
