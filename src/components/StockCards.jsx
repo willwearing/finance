@@ -13,7 +13,7 @@ const StockCards = () => {
   const [tickerData, setTickerData] = useRecoilState(tickerDataState);
   const [xValues, setXValues] = useRecoilState(xValuesState);
   const [yValues, setYValues] = useRecoilState(yValuesState);
-
+  console.log(tickerData);
   return (
     <div>
       {loading ? (

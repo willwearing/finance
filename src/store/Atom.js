@@ -20,7 +20,6 @@ export const xValuesState = atom({
   key: "xValuesState",
   default: {},
 });
-
 export const yValuesState = atom({
   key: "yValuesState",
   default: [],
