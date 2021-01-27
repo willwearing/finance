@@ -1,3 +1,4 @@
+//Displays searched for stock ticker data
 import React from "react";
 import { useRecoilState } from "recoil";
 import {
@@ -13,7 +14,7 @@ const StockCards = () => {
   const [tickerData, setTickerData] = useRecoilState(tickerDataState);
   const [xValues, setXValues] = useRecoilState(xValuesState);
   const [yValues, setYValues] = useRecoilState(yValuesState);
-  console.log(tickerData);
+
   return (
     <div>
       {loading ? (

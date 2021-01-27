@@ -24,3 +24,8 @@ export const yValuesState = atom({
   key: "yValuesState",
   default: [],
 });
+//stock search history state
+export const stockSearchHistory = atom({
+  key: "stockSearchHistory",
+  default: [],
+});
