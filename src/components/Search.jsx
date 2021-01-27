@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useRecoilState } from "recoil";
 import {
   tickerDataState,
@@ -9,6 +10,7 @@ import {
   yValuesState,
 } from "../store/Atom";
 import StockCard from "./StockCards";
+import SearchHistory from "./SearchHistory";
 
 const Search = () => {
   const [ticker, setTicker] = useRecoilState(tickerDataState);
@@ -16,6 +18,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useRecoilState(searchState);
   const [xValues, setXValues] = useRecoilState(xValuesState);
   const [yValues, setYValues] = useRecoilState(yValuesState);
+  const { user, isAuthenticated } = useAuth0();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +52,22 @@ const Search = () => {
         setYValues(yAxisValuesArray);
       })
       .catch((err) => console.log(err));
+    axios
+      .get(`https://finance-backend-stocks.herokuapp.com/users/${user.email}`)
+      .then((res) => {
+        console.log(res.data);
+        axios
+          .post("https://finance-backend-stocks.herokuapp.com/stocks", {
+            user_id: res.data.id,
+            stock_ticker: searchTerm.search,
+          })
+          .then((res) => {
+            console.log(res.data, "??");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
     e.target.reset();
   };
 
@@ -68,6 +87,7 @@ const Search = () => {
         <button>Search</button>
       </form>
       <StockCard />
+      <SearchHistory />
     </div>
   );
 };
