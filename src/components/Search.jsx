@@ -1,3 +1,4 @@
+// search component - included are a lot of api calls as recoil doesn't seem to let you set and call from state within the same component
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -26,6 +27,7 @@ const Search = () => {
     const apiKey = "FE9K3L2JE7ENJIKI";
     let xAxisValuesArray = [];
     let yAxisValuesArray = [];
+    // call finance api, set response to state and set graph plot data
     axios
       .get(
         `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${searchTerm.search}&apikey=${apiKey}`
@@ -52,10 +54,11 @@ const Search = () => {
         setYValues(yAxisValuesArray);
       })
       .catch((err) => console.log(err));
+    // check to see if user is in the backend using email address:
+
     axios
       .get(`https://finance-backend-stocks.herokuapp.com/users/${user.email}`)
       .then((res) => {
-        console.log(res.data);
         axios
           .post("https://finance-backend-stocks.herokuapp.com/stocks", {
             user_id: res.data.id,
