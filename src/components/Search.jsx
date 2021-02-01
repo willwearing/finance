@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useRecoilState } from "recoil";
+import { constSelector, useRecoilState } from "recoil";
 import {
   tickerDataState,
   loadingState,
@@ -27,7 +27,7 @@ const Search = () => {
     const apiKey = "FE9K3L2JE7ENJIKI";
     let xAxisValuesArray = [];
     let yAxisValuesArray = [];
-    // call finance api, set response to state and set graph plot data
+    // call finance api with user input, set response to state and set graph plot data
     axios
       .get(
         `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${searchTerm.search}&apikey=${apiKey}`
@@ -54,7 +54,8 @@ const Search = () => {
         setYValues(yAxisValuesArray);
       })
       .catch((err) => console.log(err));
-    // check to see if user is in the backend using email address:
+
+    // check to see if user is in the backend using email address, if they are and search for a stock, save it. If they aren't, add them to the backend and save searches:
 
     axios
       .get(`https://finance-backend-stocks.herokuapp.com/users/${user.email}`)
@@ -65,11 +66,33 @@ const Search = () => {
             stock_ticker: searchTerm.search,
           })
           .then((res) => {
-            console.log(res.data, "??");
+            console.log("email checked, data sent, stock added", res.data);
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err.message);
           });
+      })
+      .catch((err) => {
+        err
+          ? axios
+              .post(`https://finance-backend-stocks.herokuapp.com/users`, {
+                user_name: user.name,
+                user_email: user.email,
+              })
+              .then((res) => {
+                console.log(
+                  "Wasn't in the backend? Now your data is added and your stock searches are being saved",
+                  res
+                );
+                axios.post(
+                  "https://finance-backend-stocks.herokuapp.com/stocks",
+                  {
+                    user_id: res.data.id,
+                    stock_ticker: searchTerm.search,
+                  }
+                );
+              })
+          : console.log(err.message);
       });
     e.target.reset();
   };
